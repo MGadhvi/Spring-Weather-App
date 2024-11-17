@@ -1,5 +1,6 @@
 package com.mg.springweatherapp.controller;
 
+import com.mg.springweatherapp.model.Weather;
 import com.mg.springweatherapp.services.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,22 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class WeatherController {
 
-    private final WeatherService weatherService;
-
     @Autowired
-    public WeatherController(WeatherService weatherService) {
-        this.weatherService = weatherService;
-    }
-
-    @GetMapping("/")
-    public String home() {
-        return "index";
-    }
+    private WeatherService weatherService;
 
     @GetMapping("/weather")
     public String getWeather(@RequestParam("city") String city, Model model) {
-        String weatherData = weatherService.getWeather(city);
-        model.addAttribute("weatherData", weatherData);
+        Weather weather = weatherService.getWeather(city);
+        model.addAttribute("weather", weather);
         return "weather";
     }
 }
