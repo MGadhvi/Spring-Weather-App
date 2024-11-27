@@ -15,5 +15,6 @@ public record Weather(
         int timezone,
         int id,
         String name,
-        int cod
+        int cod,
+        Rain rain
 ) {}
