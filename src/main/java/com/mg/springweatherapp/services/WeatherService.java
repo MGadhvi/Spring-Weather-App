@@ -1,5 +1,6 @@
 package com.mg.springweatherapp.services;
 
+import com.mg.springweatherapp.error_handling.WeatherNotFoundException;
 import com.mg.springweatherapp.model.Weather;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class WeatherService {
         try {
             return objectMapper.readValue(jsonResponse, Weather.class);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to parse JSON", e);
+            throw new WeatherNotFoundException("Failed to parse JSON");
         }
     }
 }
